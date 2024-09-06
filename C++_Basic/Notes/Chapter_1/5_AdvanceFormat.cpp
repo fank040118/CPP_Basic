@@ -33,6 +33,20 @@ int main()
     string name_1 = "Anthony";
     cout << name_1 << endl;
     cout << name_1.at(1) << endl; // variable.at(x)能够索引在x处的字符(索引从0开始)
+    // variable.at[x]和variable[x]都能提取变量在某一索引处的值，但是前者会更安全，在索引越界
+    // 或者不存在时仅会抛出异常，而不是直接导致程序出错
+    char firstLetter = name_1.at(0); // char是只能储存单个字符的类型
+    cout << firstLetter << endl;
+
+    
+    /*
+    字符串可以直接使用加减，和其他语言相同,但要注意的是，字符串的相加需要以变量的形式做加减，
+    比如，"Anthony" + "Wang"是不能使用的，这是两个独立的字符串，而不是以变量的形式做加减
+    */
+    string firstName = "Anthony";
+    string lastName = "Wang";
+    string fullName = firstName + " " + lastName;
+    cout << fullName << endl;
 
     return 0;
 }
