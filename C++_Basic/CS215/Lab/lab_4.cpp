@@ -28,9 +28,7 @@ int main()
         << endl;
         double userInput_1;
         cin >> userInput_1;
-        // for the first time user input, set max and min to userInput.
-        maxNum = userInput_1;
-        minNum = userInput_1;
+        
 
         // while cin.fail() is false, process max and min number for user input.
         if(!cin.fail()){
@@ -41,6 +39,12 @@ int main()
                 // if userInput is a prime number, add prime number count to 1.
                 if(isPrime(primeCheck) == true)
                     primeCount++;
+            }
+
+            // for the first time user input, set max and min to userInput.
+            if(count == 0){
+                maxNum = userInput_1;
+                minNum = userInput_1;
             }
             // after first loop, compare userInput to max and min.
             if(count != 0){
