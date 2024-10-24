@@ -17,30 +17,26 @@ bool isPrime(int);
 int main()
 {
     // creat variable
-    double maxNum, minNum, userSum = 0;
+    int maxNum, minNum, userSum = 0;
     int count = 0, primeCount = 0;
     bool loop = true;
 
     // main program
     while(loop){
         
-        cout << "Please enter a series of integers, then type Q or q to process:" 
+        cout << "Please enter a series of integers, then type Q or q to process: " 
         << endl;
-        double userInput_1;
+        int userInput_1;
         cin >> userInput_1;
         
 
         // while cin.fail() is false, process max and min number for user input.
         if(!cin.fail()){
-            // if user's input is a intger, call isPrime function to check prime
-            if(floor(userInput_1) == userInput_1){
-                int primeCheck;
-                primeCheck = userInput_1;
-                // if userInput is a prime number, add prime number count to 1.
-                if(isPrime(primeCheck) == true)
+            // if userInput is a prime number, add prime number count to 1.
+            if (userInput_1 > 0){
+                if(isPrime(userInput_1) == true)
                     primeCount++;
             }
-
             // for the first time user input, set max and min to userInput.
             if(count == 0){
                 maxNum = userInput_1;
