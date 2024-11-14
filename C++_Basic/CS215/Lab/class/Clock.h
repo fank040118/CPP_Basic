@@ -15,10 +15,6 @@ const int HOURS_TO_WRAP = 24;
 class Clock {
 public:
 
-    int getHours() const;
-    int getMinutes() const;
-    int getSeconds() const;
-    
     // Default constructor.
     Clock();
 
@@ -54,6 +50,7 @@ public:
     int compareTime(Clock C) const;
 
 private:
+
     // Declare data members of the class.
     // 0 <= hours < 24, 0 <= minutes < 60, 0 <= seconds < 60
     int hours, minutes, seconds;
