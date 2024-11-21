@@ -36,11 +36,11 @@ int main()
     */
     vector<vector<double>> scores;
     for(int i = 0; i < students; i++){
-        vector<double> templateVec;
+        vector<double> templateVec; // 创建1维临时Vector
         for(int j = 0; j < homeWorks; j++){
-            templateVec.push_back(100.0);
+            templateVec.push_back(100.0); // 每次循环时为临时Vector传入新参数
         }
-        scores.push_back(templateVec);
+        scores.push_back(templateVec); // 次循环结束后将临时Vector传入主Vector
     }
     print2DVector(scores); // 呼叫打印函数
 
