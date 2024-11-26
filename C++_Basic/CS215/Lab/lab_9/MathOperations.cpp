@@ -2,22 +2,23 @@
  * Course:  CS215-401
  * Project: Lab 9
  * File:    MathOperations.cpp
- * Purpose: Define “MathOperations” class
+ * Purpose: define function for MathOperations class
  * Author:  Anthony Wang
- * Date:    2024/11/21
+ * Date:    2024/11/22
  */
 
 #include <iostream>
 #include <string>
+#include <iomanip>
 #include "MathOperations.h"
 using namespace std;
  
 // Default constructor, set all number to 0
 MathOperations::MathOperations(){
     operand1 = 0;
-    operand2 = 0;
-    theoperator = ' ';
-    answer = 0;
+    operand2 = 1;
+    theoperator = '+';
+    answer = 1;
 };
 
 // set number to op1 and op2
@@ -67,8 +68,8 @@ bool MathOperations::checkAnswer(int response) const{
 
 // print equation
 void MathOperations::print() const {
-    cout << " " << operand1 << '\n'
-         << theoperator << "  " << operand2 << '\n'
+    cout << setw(5) << operand1 << '\n'
+         << theoperator << setw(4) << operand2 << '\n'
          << "-----" << endl;
 }
 
@@ -76,21 +77,20 @@ void MathOperations::print() const {
 int MathOperations::collectUserAnswer() const {
     print();
     cout << "Please type your answer: ";
-
-    int userAnswer = 0;
+    int userAnswer;
     
-    // while loop ends when user's input don't trigger cin.fail()
     while (true) { 
         cin >> userAnswer;
         if (!cin.fail()) {
             cin.ignore(1000, '\n');
             return userAnswer;
         }
-        else {
-            cout << "Invalid input! Please try again..." << endl;
-            cout << "Please type your answer: ";
-        }
+
+        cout << "Invalid input! Please try again..." << endl;
+        cout << "Please type your answer: ";
+        
         cin.clear();
         cin.ignore(1000, '\n');
+        
     }
 }
