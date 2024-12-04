@@ -19,6 +19,8 @@ using namespace std;
 MathReport::MathReport(){
     numCorrectAnswers = 0;
     numWrongAnswers = 0;
+    mathQuestions;
+    errorList;
 
 }
 
