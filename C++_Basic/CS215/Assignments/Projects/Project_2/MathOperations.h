@@ -1,9 +1,4 @@
-/* File:    MathOperations.h
- * Course:  CS215-401
- * Project: Lab 9
- * Purpose: 
- * Author:  Anthony Wang
- */
+
 #ifndef MathOperations_H
 #define MathOperations_H
 

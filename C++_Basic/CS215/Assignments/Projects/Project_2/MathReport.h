@@ -1,5 +1,12 @@
 #include <vector>
 #include <list>
+#include "MathOperations.h"
+
+using namespace std;
+
+
+#ifndef MathRport_H
+#define MathRport_H
 
 class MathReport
 {
@@ -22,15 +29,13 @@ class MathReport
         // otherwise, display questions without answers.
         void generateReport(bool showAnswer) const;
         // Display the questions in errorList for additional practice,
-        // collect
-        // the user answer, and check if the answer is correct so that it
+        // collect user answer, and check if the answer is correct so that it
         // can be removed from the errorList.
         // This function should also print "Congratulations!" With a message
         // confirming a correct answer. When the answer is wrong, it should
         // indicate this without printing the right answer, and encourage
         // the user to keep practicing.
-        // Return false if all questions in errorList have been corrected and
-        // removed
+        // Return false if all questions in errorList have been corrected and removed
         // otherwise return true (meaning errorList is not empty yet, and the
         // user needs more practice).
         bool needMorePractice();
@@ -38,5 +43,7 @@ class MathReport
         int numCorrectAnswers; // number of correctly answered questions
         int numWrongAnswers; // number of wrong answers
         vector<MathOperations> mathQuestions; // Sequence of questions.
-        list<MathOperations> errorList; // Sequence of questions with wrong answers.
+        list<MathOperations> errorList; // Set a squence of questions with wrong answers.
 };
+
+#endif

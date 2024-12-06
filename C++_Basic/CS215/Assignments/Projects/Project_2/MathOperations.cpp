@@ -1,11 +1,3 @@
-/*
- * Course:  CS215-401
- * Project: Lab 9
- * File:    MathOperations.cpp
- * Purpose: define function for MathOperations class
- * Author:  Anthony Wang
- * Date:    2024/11/22
- */
 
 #include <iostream>
 #include <string>
