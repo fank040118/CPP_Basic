@@ -1,3 +1,11 @@
+/*
+ * Course:  CS215-401
+ * Project: Project 2
+ * File:    MathOperations.h
+ * Purpose: define MathOperations class
+ * Author:  Anthony Wang
+ * Date:    2024/11/22
+ */
 
 #ifndef MathOperations_H
 #define MathOperations_H
@@ -38,18 +46,11 @@ class MathOperations
         bool checkAnswer(int response) const;
         // Display the question in the format described in the problem
         // statement.
-        // For example:
-        // 146
-        // + 79
-        // _____
-        //
         void print() const;
         // Display the question by calling print() first.
         // Then ask the user for the answer.
-        // Returns the valid user answer collected from the user
-        // input.
-        // In the case of invalid input, indicate this and
-        // ask the user again.
+        // Returns the valid user answer collected from the user input.
+        // In the case of invalid input, indicate this and ask again.
         int collectUserAnswer() const;
     private:
         int operand1; // the first operand for basic math operation

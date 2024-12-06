@@ -1,13 +1,20 @@
+/*
+ * Course:  CS215-401
+ * Project: Project 2
+ * File:    MathReport.h
+ * Purpose: define MathReport Class
+ * Author:  Anthony Wang
+ * Date:    2024/12/5
+ */
+
 #include <vector>
 #include <list>
 #include "MathOperations.h"
 
 using namespace std;
 
-
 #ifndef MathRport_H
 #define MathRport_H
-
 class MathReport
 {
     public:
@@ -45,5 +52,4 @@ class MathReport
         vector<MathOperations> mathQuestions; // Sequence of questions.
         list<MathOperations> errorList; // Set a squence of questions with wrong answers.
 };
-
 #endif
