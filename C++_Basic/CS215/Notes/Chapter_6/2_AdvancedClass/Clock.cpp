@@ -26,7 +26,7 @@ Clock::Clock(int hh, int mm, int ss){
     }
 }
 
-void Clock :: setClock(int hh, int mm, int ss){
+void Clock::setClock(int hh, int mm, int ss){
     hours = hh;
     minutes = mm;
     seconds = ss;

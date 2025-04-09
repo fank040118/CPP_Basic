@@ -1,3 +1,5 @@
+#include <string>
+using namespace std;
 /*
 封装(Encapsulation)指类型的数据成员(属性)被隐藏在了类的内部，
 仅能通过类的受控的接口(成员函数)访问，这些被封装的内部数据是
