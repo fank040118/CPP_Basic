@@ -5,6 +5,7 @@
 
 using namespace std;
 
+
 void vecPrint(vector<int> vec);
 
 int main(){
