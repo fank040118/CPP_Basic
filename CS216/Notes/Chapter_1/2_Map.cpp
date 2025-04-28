@@ -26,7 +26,7 @@ int main(){
     // 更简单的方法是 map[key] = value
     userMap_1["Banana"] = 10;
     // map.erase(key) 用于删除目标key和value
-    userMap_1.erase("Banana")
+    userMap_1.erase("Banana");
 
     // map的元素查询——————————————————————————————————————————————————————
     // 可通过使用 map[key] 直接查询 key 对应的 value
