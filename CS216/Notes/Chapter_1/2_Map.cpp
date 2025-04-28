@@ -39,6 +39,10 @@ int main(){
     // 创建一个 迭代器，让其通过 find() 指令遍历整个map
     auto it = userMap_1.find("WaterMalon");
     // 如果 迭代器 指向的目标不是map的最后一个位置，那么就代表找到了相对应的key和value
+    
+    // 在map容器中，迭代器 指向的并不是某一对下的某一个元素，而是指向了一整个pair对象
+    // 即 it 会指向 pair<key, value>
+    // 那么使用 it->first 或 it->second 可通过指针操作符调用pair中的头成员或次成员
     if(it != userMap_1.end()){
         cout << it->first  << " -> " << it->second << endl;
     }
