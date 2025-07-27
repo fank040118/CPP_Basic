@@ -28,7 +28,17 @@ else
 fi
 
 # 提示输入提交消息
-read -p "请输入提交信息: " commit_message
+echo "正在打开编辑器输入提交信息..."
+temp_file=$(mktemp)
+${EDITOR:-nano} "$temp_file"
+commit_message=$(cat "$temp_file")
+rm "$temp_file"
+
+# 检查是否输入了提交信息
+if [ -z "$commit_message" ]; then
+    echo "未输入提交信息，脚本退出"
+    exit 1
+fi
 
 # 提交更改
 git commit -m "$commit_message"
