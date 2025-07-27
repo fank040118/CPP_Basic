@@ -70,6 +70,7 @@ public:
         result.pointPosition = this->pointPosition + other.pointPosition;
         result.pointValue = this->pointValue + other.pointValue;
         result.pointName = this->pointName + "+" + other.pointName;
+        // 最终返回加法结果
         return result;
     }
     
@@ -119,7 +120,7 @@ public:
      * 
      * 逐部分解释：
      * - friend: 关键字，表示这是友元函数
-     * - ostream&: 返回类型，ostream的引用(如cout, cerr等)
+     * - ostream&: 返回类型，ostream的引用(如cout, cerr等)，因为函数的返回是ostream的引用，而不是Point对象
      * - operator<<: 特殊的函数名，表示重载<<操作符
      * - ostream& out: 第一个参数，输出流对象
      * - const Point& p: 第二个参数，要输出的Point对象
