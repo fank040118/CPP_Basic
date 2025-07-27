@@ -43,7 +43,7 @@ int main(){
     // 显示所有水果价格
     cout << "水果价格表：" << endl;
     for(const auto& pair : fruitPrices) {
-        cout << pair.first << ": $" << pair.second << endl;
+https://gf2.sunborngame.com/amhyyz?assist_code=2716063280        cout << pair.first << ": $" << pair.second << endl;
     }
 
     // 4. 元素查找
