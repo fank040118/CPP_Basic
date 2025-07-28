@@ -6,86 +6,126 @@ using namespace std;
 int main()
 {
     /*
-    我们已经知道，数组的大小在定义以后就被确定，它无法在程序运行期间更改大小
-    但是，虽然数组的大小是固定的，但这不代表我们就使用了等同大小的容量，比如
-    int myArray[5] = {1,2,3};中，实际上我们只用了三个空间，但数组的大小
-    仍然是5格，但如果我们不记录使用的容量，我们就无法得知数组的哪一部分被使
-    用，哪一部分仍然是空的。
-    所以，在创建并使用数组时，我们需要记住创建的数组大小，与使用的数组容量，
-    如果不记住这些属性，那么在此后将难以继续调用这些数组
+    高级数组操作 - 动态使用固定大小数组
+    
+    关键概念:
+    1. 数组容量(capacity): 数组声明时的最大大小，固定不变
+    2. 数组大小(size): 当前实际使用的元素个数，可以小于容量
+    3. 有效元素: 实际存储有意义数据的元素
+    
+    为什么需要区分容量和大小:
+    - 数组容量固定，但不一定完全使用
+    - 需要跟踪当前使用了多少个元素
+    - 便于实现插入、删除等动态操作
     */
+    cout << "=== 数组复制操作 ===" << endl;
+    
     const int MAX_SIZE = 5;
     int powers[MAX_SIZE] = {0, 1, 2, 4, 11};
     int lucky_numbers[MAX_SIZE];
-    // 如果我们创建了一个数组，并且想将其拷贝给另一个数组变量，那么我们并不能
-    // 直接将其放在等号之后，这种行为并不能直接赋予变量
-    // lucky_numbers = powers; 这会导致程序错误
-
-    // 正确的方式，是依次将数组中的某个索引处的数据赋予给另一个索引，我们
-    // 可以使用For循环来进行这项任务，要注意的是，这里是 < MAX_SIZE，而
-    // 不是 <= MAX_SIZE，因为索引是从0开始，所以能够索引的最高值也应该-1
-    for(int i = 0; i < MAX_SIZE; i++){
+    
+    /*
+    数组复制注意事项:
+    - 不能直接使用 = 操作符复制整个数组
+    - 必须逐个元素复制
+    - 数组名实际上是指向第一个元素的指针
+    */
+    
+    // 错误方式: lucky_numbers = powers;  // 编译错误！
+    
+    // 正确方式: 使用循环逐个复制元素
+    for(int i = 0; i < MAX_SIZE; i++) {
         lucky_numbers[i] = powers[i];
     }
-    for(int i = 0; i < MAX_SIZE; i++){
-        cout << lucky_numbers[i] << ' ';
+    
+    cout << "原数组powers: ";
+    for(int i = 0; i < MAX_SIZE; i++) {
+        cout << powers[i] << " ";
     }
-
-    /*
-    那么如果想要在数组的中间某一处插入元素呢？如果我们在索引[3]处(即第4个元素)
-    的位置插入一个元素，那么从该处开始的所有原元素都应该向后移动一位，所以在
-    插入元素之前，我们需要确定该数组的实际大小要大过我们使用的大小：
-    */
-    // 如果我们有一数组：
-    int myArray[5] = {1,2,4,5};
-    /*
-    我们想要在索引[2](即原来的元素为4的地方)插入一个元素，新的数组就会变成
-    myArray = {1,2,3,4,5}，这刚好等于数组的实际大小，如果我们想要插入两
-    个元素，那么就无法实现，因为这个数组只有5个空间。
-    想要插入新元素，我们就需要将原有在插入位置处开始的所有元素都向后移动。
-    即 myArray = {1,2,4,5,0} -> myArray = {1,2,0,4,5}，而最后一位
-    空值0将会被删除掉，向后移动的方式是将n-1处的值赋值给n处，注意必须是赋值过程
-    必须是从最后一位开始，而不是从第一位开始，因为如果先将第一位的值赋给第二位
-    的话，再将第二位的值赋给第三位的行为就会导致第三位也会得到第二位的值。
-    */
-    int currSize = 4;
-    int insertIndex = 2;
-    int insertVariable = 3;
-
-    /*
-    对于这个数组来说，我们在插入新元素之前有4个元素，索引是0-3，我们想要将所有
-    插入处开始的元素都向后移动一位，那么我们就需要先从索引为[4]的地方开始，他
-    在此之前是空值0，现在我们将使用myArray[4] = myArray[3]来让索引处为3的
-    值赋给它，然后使用myArray[3] = myArray[2]重复这个过程，那么什么时候结束
-    循环呢？我们希望新增的值能够被插入在索引为[2]处，那么也就是说索引[2]处不需要
-    被赋[1]处的值，所以for循环将在i > insertIndex情况下进行，这样它最后一步
-    会是将[2]处的值赋给[3]。
-    */
-    for(int i = currSize; i > insertIndex; i--){
-        myArray[i] = myArray[i-1];
+    cout << endl;
+    
+    cout << "复制后的lucky_numbers: ";
+    for(int i = 0; i < MAX_SIZE; i++) {
+        cout << lucky_numbers[i] << " ";
     }
-    myArray[insertIndex] = insertVariable;
-    for(int i = 0; i < 5; i++){
-        cout << myArray[i] << ' ';
-    }
-    currSize++;
     cout << endl;
 
-    // 同理，我们也可以删除数组中的元素，如果我们要删除索引为[1]处的数，那么我
-    // 们就需要迭代将[2]处的元素赋给[1]，我们现在总共有5个数，这个行为将持续
-    // 到索引为[3]处，因为[4]处是最后一个值，在此之后的[5]并不存在，所以[4]
-    // 并不能得到[5]的值，那么for循环的条件将会是i < (5-1)，让其循环到[3]处
-    int deletIndex = 1;
-    for(int i = deletIndex; i < currSize-1; i++){
-        myArray[i] = myArray[i+1];
+    cout << "\n=== 数组元素插入操作 ===" << endl;
+    
+    /*
+    在数组中间插入元素的步骤:
+    1. 确保数组有足够空间(currentSize < maxCapacity)
+    2. 将插入位置及之后的所有元素向右移动一位
+    3. 在目标位置插入新元素
+    4. 更新数组当前大小
+    
+    关键点: 必须从右向左移动元素，避免数据覆盖
+    */
+    
+    int myArray[5] = {1, 2, 4, 5};  // 初始: {1, 2, 4, 5, 0}
+    int currSize = 4;               // 当前有效元素个数
+    int insertIndex = 2;            // 要插入的位置
+    int insertValue = 3;            // 要插入的值
+    
+    cout << "插入前的数组: ";
+    for(int i = 0; i < 5; i++) {
+        cout << myArray[i] << " ";
+    }
+    cout << "(当前大小: " << currSize << ")" << endl;
+    
+    // 检查是否有足够空间插入
+    if(currSize < 5) {
+        // 从右向左移动元素，为新元素腾出空间
+        for(int i = currSize; i > insertIndex; i--) {
+            myArray[i] = myArray[i-1];
+        }
+        
+        // 在指定位置插入新元素
+        myArray[insertIndex] = insertValue;
+        currSize++;  // 更新当前大小
+        
+        cout << "在索引" << insertIndex << "处插入" << insertValue << "后: ";
+        for(int i = 0; i < 5; i++) {
+            cout << myArray[i] << " ";
+        }
+        cout << "(当前大小: " << currSize << ")" << endl;
     }
 
-    // 最后我们的有效数字只有在索引[0~3]内，[4]和[3]的值重复，所以清空[4]的值
-    currSize--;
-    myArray[currSize] = 0;
+    cout << "\n=== 数组元素删除操作 ===" << endl;
     
-    for(int i = 0; i < 5; i++){
-        cout << myArray[i] << ' ';
+    /*
+    删除数组中间元素的步骤:
+    1. 将删除位置之后的所有元素向左移动一位
+    2. 更新数组当前大小
+    3. 可选: 清空最后一个位置的值
+    
+    关键点: 从左向右移动元素，填补删除位置的空缺
+    */
+    
+    int deleteIndex = 1;  // 要删除的位置(删除元素2)
+    
+    cout << "删除前的数组: ";
+    for(int i = 0; i < 5; i++) {
+        cout << myArray[i] << " ";
+    }
+    cout << "(当前大小: " << currSize << ")" << endl;
+    
+    // 检查删除索引是否有效
+    if(deleteIndex >= 0 && deleteIndex < currSize) {
+        // 从左向右移动元素，覆盖要删除的元素
+        for(int i = deleteIndex; i < currSize - 1; i++) {
+            myArray[i] = myArray[i + 1];
+        }
+        
+        // 更新当前大小并清空最后一个位置
+        currSize--;
+        myArray[currSize] = 0;  // 可选: 清空末尾元素
+        
+        cout << "删除索引" << deleteIndex << "处的元素后: ";
+        for(int i = 0; i < 5; i++) {
+            cout << myArray[i] << " ";
+        }
+        cout << "(当前大小: " << currSize << ")" << endl;
     }
 
     

@@ -1,37 +1,67 @@
 #include <iostream>
 #include <iomanip>
 #include <string>
+#include <cstring>  // 用于C字符串函数
 using namespace std;
 
 int main()
 {
+    cout << "=== C字符串(C-String) vs C++字符串(String) ===" << endl;
+    
     /*
-    C和C++在默认情况下使用一种叫“C-string“的字符数组来储存字符，在不使用
-    #include <string>的情况下，我们使用char类型来储存字符串，但我们知道
-    char类型实际上只能储存 单个字符，所以当我们需要储存多个字符的时候，我
-    们就需要使用C-string来储存字符：
-    char userChar[] = "xxxx...."
-    此类型就是一个C-String，它实际上是一个数组，这个数组中有多个char类型
-    变量，而每个变量都储存一个字符。
+    C字符串(C-String):
+    - 本质是字符数组(char array)
+    - 以空字符'\0'结尾(null-terminated)
+    - 继承自C语言的字符串处理方式
+    - 内存管理需要手动处理
     */
-    char userChar[] = "Hello world";
-    // cout可以正常打印一整个C-string的内容，但无法用在普通的数组上。
-    cout << userChar << endl;
+    
+    // 创建C字符串的方式
+    char cstr1[] = "Hello World";  // 自动添加'\0'
+    char cstr2[] = {'H', 'e', 'l', 'l', 'o', '\0'};  // 手动指定每个字符
+    
+    cout << "C字符串cstr1: " << cstr1 << endl;
+    cout << "C字符串cstr2: " << cstr2 << endl;
+    
+    // C字符串的特点演示
+    cout << "\nC字符串内部结构:" << endl;
+    for(int i = 0; cstr1[i] != '\0'; i++) {
+        cout << "cstr1[" << i << "] = '" << cstr1[i] << "'" << endl;
+    }
+    cout << "结尾的空字符: '\\0'" << endl;
+    
     /*
-    为什么C-string可以被Cout打印，但普通的数组却不行呢？因为C-string是一种
-    以‘\0’(空字符)结尾的数组，而普通数组并没有这样的形式，空字符用于标注这个
-    字符串(虽然它本质上是一个数组)的结束位置，而当cout命令发现这个数组是以空
-    字符结尾时，它将使用类似于字符串打印的方式去打印这个数组。
+    C++ string类:
+    - 标准库提供的字符串类
+    - 自动管理内存
+    - 提供丰富的成员函数
+    - 更安全、更易用
     */
-    // string 是标准库提供的更加高级的字符串类型，提供更加丰富的操作指令，比如
-    // 相加，索引，切片等多种命令。
-    string userString = "Hello world";
-    cout << userString << endl;
-
-    char hello[] = {'H', 'e', 'l', 'l', 'o', '\0'};  // 这是一个字符数组
-    char hello_2[] = "Hello";  // 这与前者相同，他们本质上都是5个容量的字符数组
-    // 如果访问一个不在数组范围内的索引，即越界访问，可能会导致不可预测的结果，比如
-    // 访问到其他变量的值，甚至修改值，所以在访问前必须确定访问的索引有效。
-
+    string cppStr = "Hello World";
+    cout << "\nC++字符串: " << cppStr << endl;
+    cout << "字符串长度: " << cppStr.length() << endl;
+    
+    // 比较两种字符串类型
+    cout << "\n=== 功能对比 ===" << endl;
+    
+    // 字符串连接
+    string str1 = "Hello ";
+    string str2 = "World";
+    string result = str1 + str2;  // C++ string支持+操作
+    cout << "C++ string连接: " << result << endl;
+    
+    // C字符串需要使用函数进行操作
+    char cstr3[20] = "Hello ";
+    strcat(cstr3, "World");  // 使用strcat函数连接
+    cout << "C字符串连接: " << cstr3 << endl;
+    
+    /*
+    重要区别:
+    1. 内存管理: C++string自动管理，C字符串需要手动管理
+    2. 安全性: C++string更安全，C字符串容易越界
+    3. 功能性: C++string功能更丰富
+    4. 兼容性: C字符串与C语言兼容
+    */
+    
     return 0;
 }
